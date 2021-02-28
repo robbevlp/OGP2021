@@ -9,7 +9,7 @@ public class PacMan {
 	
 	public Square getSquare() { return square; }
 	
-	public int getNbLives() { return nbLives; }
+	public int getNbLives() { int result = nbLives; return result; }
 
 	public PacMan(int nbLives, Square square) {
 		this.square = square;
