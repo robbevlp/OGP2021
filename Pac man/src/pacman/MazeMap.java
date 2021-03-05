@@ -40,3 +40,9 @@ public class MazeMap {
 		this.passable = passable;
 	}
 }
+
+
+
+public static Square of(MazeMap mazeMap, int rowIndex, int columnIndex) {
+	boolean result = new Boolean(mazeMap.isPassable(rowIndex, columnIndex));
+}
