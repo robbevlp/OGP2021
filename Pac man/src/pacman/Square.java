@@ -24,7 +24,7 @@ import java.util.Arrays;
 	/**
 	 * Already covered with method: Square of()
 	 */
-	private Square(int row, int column, boolean passable, MazeMap mazeMap) {
+	public Square(int row, int column, boolean passable, MazeMap mazeMap) {
 		this.row = row;
 		this.column = column;
 		this.passable = passable;
@@ -53,8 +53,8 @@ import java.util.Arrays;
 	public boolean isPassable() { return passable; }
 	
 	/**
-	 * @pre | rowIndex <= (mazeMap.getHeight() - 1) && rowIndex <= 0
-	 * @pre | columnIndex <= (mazeMap.getWidth() - 1) && columnIndex <= 0
+	 * @throws | rowIndex < 0 || rowIndex > (mazeMap.getHeight() - 1)
+	 * @throws | columnIndex < 0 || columnIndex > (mazeMap.getWidth() - 1)
 	 * 
 	 * @inspects | mazeMap
 	 * 
@@ -63,9 +63,11 @@ import java.util.Arrays;
 	 * @post | result.getColumnIndex() == columnIndex
 	 * @post | result.getMazeMap() == mazeMap
 	 * @post | new Boolean(result.isPassable()) == new Boolean(mazeMap.isPassable(rowIndex, columnIndex))
-	 * 
 	 */
 	public static Square of(MazeMap mazeMap, int rowIndex, int columnIndex) {
+		if (columnIndex < 0 || columnIndex > (mazeMap.getWidth() - 1)) {throw new IllegalStateException("ColumnIndex out of range."); }
+		if (rowIndex < 0 || rowIndex > (mazeMap.getHeight() - 1)) {throw new IllegalStateException("RowIndex out of range."); }
+		
 		boolean result = new Boolean(mazeMap.isPassable(rowIndex, columnIndex));
 		return new Square(rowIndex, columnIndex, result, mazemap);
 	}
@@ -81,7 +83,7 @@ import java.util.Arrays;
 		
 		switch(direction) {
 		case UP:
-			rowIndex = row;
+			columnIndex = column;
 			if (this.row == 0) {rowIndex = mazemap.getHeight() - 1; } else {rowIndex = row - 1; }
 			break;
 		case DOWN:
@@ -89,7 +91,7 @@ import java.util.Arrays;
 			if (this.row == mazemap.getHeight() - 1) {rowIndex = 0; } else {rowIndex = row + 1; }
 			break;
 		case RIGHT:
-			columnIndex = column;
+			rowIndex = row;
 			if (this.column == mazemap.getWidth() - 1) {columnIndex = 0; } else {columnIndex = column + 1; }
 			break;
 		case LEFT:
@@ -137,7 +139,8 @@ import java.util.Arrays;
 	}
 	
 	/**
-	 * @pre | other != null
+	 * @throws | other == null
+	 * 
 	 * @inspects | this
 	 * @inspects | other
 	 * 
@@ -145,6 +148,7 @@ import java.util.Arrays;
 	 * @post | result == true || result == false
 	 */
 	public boolean equals(Square other) {
+		if (other == null) {throw new IllegalStateException("The second square cannot be null."); }
 		if (other.getRowIndex() != row || other.getColumnIndex() != column || other.isPassable() != passable || other.getMazeMap() != mazemap) {return false; } else {return true; }
 		
 		
