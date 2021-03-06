@@ -40,7 +40,7 @@ public class PacMan {
 	 * 
 	 * @mutates | this
 	 * @post | this.getSquare() == square
-	 * @post | old(getNbLives()).equals(this.getNbLives())
+	 * @post | getNbLives() == old(getNbLives())
 	 */
 	public void setSquare(Square square) { 
 		this.square = square; }
@@ -50,7 +50,7 @@ public class PacMan {
 	 * @throws | this.getNbLives() < 1
 	 * 
 	 * @mutates | this
-	 * @post | old(getNbLives()).equals(this.getNbLives())
+	 * @post | getNbLives() == old(getNbLives())
 	 * @post | this.getSquare().equals(old(getSquare()))
 	 */
 	public void die() { 
