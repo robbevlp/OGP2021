@@ -1,9 +1,10 @@
 package pacman;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class PacManTest {
+class DotTest {
 
 	@Test
 	void test() {
@@ -20,18 +21,9 @@ class PacManTest {
 		MazeMap mazeMap = new MazeMap(6, 10, passable);
 		Square square = mazeMap.of(mazeMap, 1, 1);
 		
-		PacMan pacman = new PacMan(3, square);
-		assert(pacman.getNbLives() == 3);
-		assert(pacman.getSquare().equals(square));
+		Dot dot = new Dot(square);
+		assert(dot.getSquare() == square);
 		
-		Square squareNew = mazeMap.of(mazeMap, 2, 1);
-		pacman.setSquare(squareNew);
-		assert(pacman.getSquare() == squareNew);
-		assert((pacman.getSquare() == square) == false);
-		
-		pacman.die();
-		assert(pacman.getNbLives() == 2);
-		assert((pacman.getNbLives() == 3) == false);
 	}
 
 }

@@ -9,7 +9,6 @@ import java.util.stream.IntStream;
  * @immutable
  */
 public class MazeMap {
-	//verander documentatie nog van passable[i] naar intstreams.
 	/**
 	 * @invar | width >= 1
 	 * 
@@ -84,6 +83,17 @@ public class MazeMap {
 		this.passable = passable;
 	}
 
+	public boolean equals(MazeMap other) {
+		if (other.getWidth() != width || other.getHeight() != height) {return false;}
+		for (int row = 0; row < height; row ++) {
+			for (int column = 0; column < width; column++) {
+				if(this.isPassable(row, column) != other.isPassable(row, column)) {return false;}
+			}
+		}
+		
+		return true;
+	}
+	
 	/**
 	 * @throws | rowIndex < 0 || rowIndex > (mazeMap.getHeight() - 1)
 	 * @throws | columnIndex < 0 || columnIndex > (mazeMap.getWidth() - 1)
@@ -99,7 +109,7 @@ public class MazeMap {
 	public static Square of(MazeMap mazeMap, int rowIndex, int columnIndex) {
 		if(rowIndex < 0 || rowIndex > (mazeMap.getHeight() - 1)) {throw new IllegalStateException("row is out of range."); }
 		if(columnIndex < 0 || columnIndex > (mazeMap.getWidth() - 1)) {throw new IllegalStateException("column is out of range"); }
-		boolean passable = new Boolean(mazeMap.isPassable(rowIndex, columnIndex));
+		boolean passable = mazeMap.isPassable(rowIndex, columnIndex);
 		return new Square(rowIndex, columnIndex, passable, mazeMap);
 	}	
 }

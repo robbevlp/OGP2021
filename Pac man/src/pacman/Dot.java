@@ -22,6 +22,8 @@ public class Dot {
 	 * @return | this
 	 * @post | this.getSquare() == square
 	 */
-	public Dot(Square square) { this.square = square; }
-
+	public Dot(Square square) { 
+		if(square == null) {throw new IllegalStateException("Square cannot be null."); }
+		this.square = square; }
+	
 }

@@ -13,7 +13,7 @@ import java.util.Arrays;
 	 * Omdat integers en booleans immutable zijn, moeten we geen kopie weggeven bij de getters, ondanks @immutable.
 	 * @invar | 0 <= row
 	 * @invar | 0 <= column
-	 * @invar | new Boolean(passable) != null
+	 * @invar | passable == true || passable == false
 	 */
 	private int row;
 	private int column;
@@ -62,7 +62,7 @@ import java.util.Arrays;
 	 * @post | result.getRowIndex() == rowIndex
 	 * @post | result.getColumnIndex() == columnIndex
 	 * @post | result.getMazeMap() == mazeMap
-	 * @post | new Boolean(result.isPassable()) == new Boolean(mazeMap.isPassable(rowIndex, columnIndex))
+	 * @post | result.isPassable() == mazeMap.isPassable(rowIndex, columnIndex)
 	 */
 	public static Square of(MazeMap mazeMap, int rowIndex, int columnIndex) {
 		if (columnIndex < 0 || columnIndex > (mazeMap.getWidth() - 1)) {throw new IllegalStateException("ColumnIndex out of range."); }
@@ -149,9 +149,12 @@ import java.util.Arrays;
 	 */
 	public boolean equals(Square other) {
 		if (other == null) {throw new IllegalStateException("The second square cannot be null."); }
-		if (other.getRowIndex() != row || other.getColumnIndex() != column || other.isPassable() != passable || other.getMazeMap() != mazemap) {return false; } else {return true; }
+		if(other.getRowIndex() != row) {return false; }
+		if(other.getColumnIndex() != column) {return false; }
+		if(other.isPassable() != passable){return false; }
+		if(other.getMazeMap().equals(mazemap) == false) {return false; }
 		
-		
+		return true;
 	}
 	
 }

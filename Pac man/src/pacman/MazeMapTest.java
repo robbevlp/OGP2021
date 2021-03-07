@@ -8,19 +8,44 @@ class MazeMapTest {
 
 	@Test
 	void test() {
-		boolean[] passable = new boolean[4];
-		passable[0] = false;
-		passable[2] = false;
-		passable[1] = true;
-		passable[3] = true;
+		boolean[] passable = {false, false, false, false ,false, false,
+				false, true, false, true, true , false,
+				false, true, false, true, true, false,
+				false, true, false, true, false, false,
+				false, true, true, true, true, false,
+				false, false, false, true, false, false,
+				false, true, true, true, true, false,
+				false, true, false, false, true, false,
+				false, true, false, true, true, false,
+				false, false, false, false, false, false};
+		MazeMap mazeMap = new MazeMap(6, 10, passable);
 		
-		MazeMap mazemap = new MazeMap(2, 2, passable);
-		assert(mazemap.getHeight() == 2);
-		assert(mazemap.getWidth() == 2);
-		assert(mazemap.isPassable(0,0) == false);
-		assert(mazemap.isPassable(0,1) == true);
-		assert(mazemap.isPassable(1,0) == false);
-		assert(mazemap.isPassable(1,1) == true);
+		assert(mazeMap.getWidth() == 6);
+		assert(mazeMap.getHeight() == 10);
+		assert((mazeMap.getWidth() == 10) == false);
+		assert(mazeMap.isPassable(5, 5) == false);
+		assert(mazeMap.isPassable(5, 3) == true);
+		
+		boolean[] passableNew = {true, false, false, false ,false, false,
+				false, true, false, true, true , false,
+				false, true, false, true, true, false,
+				false, true, false, true, false, false,
+				false, true, true, true, true, false,
+				false, false, false, true, false, false,
+				false, true, true, true, true, false,
+				false, true, false, false, true, false,
+				false, true, false, true, true, false,
+				false, false, false, false, false, false};
+		
+		MazeMap fakeMazeMap = new MazeMap(6,10,passableNew);
+		
+		assert(mazeMap.equals(fakeMazeMap) == false);
+		assert(fakeMazeMap.isPassable(0, 0) == true);
+		
+		MazeMap newMazeMap = new MazeMap(6,10,passable);
+		assert(mazeMap.equals(newMazeMap)==true);
+		
+		
 	}
 
 }

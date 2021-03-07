@@ -51,7 +51,7 @@ public class Ghost {
 	 */
 	public void setSquare(Square square) { 
 		if (square.isPassable() == false) {throw new IllegalStateException("Square must be passable."); }
-		if(square.getMazeMap().equals(this.getSquare().getMazeMap())){throw new IllegalStateException("Both squares must have same mazemap."); }
+		if((square.getMazeMap().equals(this.getSquare().getMazeMap())) == false){throw new IllegalStateException("Both squares must have same mazemap."); }
 		this.square = square; }
 	
 	/**
