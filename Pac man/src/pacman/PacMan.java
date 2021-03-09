@@ -29,10 +29,6 @@ public class PacMan {
 	public int getNbLives() { return nbLives; }
 
 	/**
-<<<<<<< HEAD
-	 * @throws | nbLives < 1			 // TODO Throws!
-=======
-	 * 
 	 * @return | result
 	 * @post | result == this.getSquare().getMazeMap()
 	 */
@@ -40,7 +36,6 @@ public class PacMan {
 	
 	/**
 	 * @throws | nbLives < 1
->>>>>>> branch 'master' of https://github.com/robbevlp/OGP2021
 	 * @throws | square == null
 	 * 
 	 * @return | result
@@ -76,11 +71,8 @@ public class PacMan {
 	 */
 	public void die() { 
 		if (nbLives < 1) {throw new IllegalStateException("Pacman is already dead."); }
-		if (nbLives > 1) {
-			nbLives --;
-		}else {
-			throw new RuntimeException("You died."); 
-			} 
+		nbLives --;
+		if (nbLives == 0) {throw new RuntimeException("You died."); }
 		}
 
 }

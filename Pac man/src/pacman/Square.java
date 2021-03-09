@@ -19,7 +19,7 @@ import java.util.stream.IntStream;
 	private int row;
 	private int column;
 	private boolean passable;
-	private static MazeMap mazemap; 
+	private MazeMap mazemap; 
 	
 	
 	/**
@@ -73,7 +73,7 @@ import java.util.stream.IntStream;
 		if (rowIndex < 0 || rowIndex >= mazeMap.getHeight()) {throw new IllegalStateException("RowIndex out of range."); }
 		
 		boolean result = mazeMap.isPassable(rowIndex, columnIndex);
-		return new Square(rowIndex, columnIndex, result, mazemap);
+		return new Square(rowIndex, columnIndex, result, mazeMap);
 	}
 	
 	/**
@@ -100,7 +100,7 @@ import java.util.stream.IntStream;
 			break;
 		case LEFT:
 			rowIndex = row;
-			if (this.column == 0) {columnIndex = mazemap.getWidth() - 1; } else {columnIndex = row - 1; }
+			if (this.column == 0) {columnIndex = mazemap.getWidth() - 1; } else {columnIndex = column - 1; }
 		}
 		
 		return this.of(mazemap, rowIndex, columnIndex);
