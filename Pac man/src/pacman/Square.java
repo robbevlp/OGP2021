@@ -1,7 +1,5 @@
 package pacman;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.IntStream;
 
 /**
  * Each instance of this class represents a position in a maze, specified by a row index and a column index.
@@ -53,6 +51,7 @@ import java.util.stream.IntStream;
 	/**
 	 * @inspects | this
 	 * @basic
+	 * @post | result == true || result == false
 	 */
 	public boolean isPassable() { return passable; }
 	
@@ -103,7 +102,7 @@ import java.util.stream.IntStream;
 			if (this.column == 0) {columnIndex = mazemap.getWidth() - 1; } else {columnIndex = column - 1; }
 		}
 		
-		return this.of(mazemap, rowIndex, columnIndex);
+		return of(mazemap, rowIndex, columnIndex);
 	}
 
 	/**

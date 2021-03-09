@@ -31,6 +31,7 @@ public class PacMan {
 	/**
 	 * @return | result
 	 * @post | result == this.getSquare().getMazeMap()
+	 * @post | result != null
 	 */
 	public MazeMap getMazeMap() {return mazemap; }
 	
