@@ -19,7 +19,7 @@ class GhostTest {
 							  false, true, false, true, true, false,
 							  false, false, false, false, false, false};
 		MazeMap mazemap1 = new MazeMap(6, 10, passable);
-		Square squareghost1 = new Square(2,3,true, mazemap1); //Recheck 
+		Square squareghost1 = new Square(2,3,true, mazemap1); //Recheck OK
 		Square squareghost2 = new Square(1, 1, true, mazemap1);
 		
 		Ghost ghost1 = new Ghost(squareghost1, Direction.DOWN);

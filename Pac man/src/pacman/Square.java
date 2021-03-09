@@ -1,6 +1,7 @@
 package pacman;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 /**
  * Each instance of this class represents a position in a maze, specified by a row index and a column index.
@@ -18,7 +19,7 @@ import java.util.Arrays;
 	private int row;
 	private int column;
 	private boolean passable;
-	private static MazeMap mazemap;
+	private static MazeMap mazemap; 
 	
 	
 	/**
@@ -34,16 +35,19 @@ import java.util.Arrays;
 	/**
 	 * @inspects | this
 	 * @basic
+	 * @post | result != null
 	 */
 	public MazeMap getMazeMap() { return mazemap; }
 	/**
 	 * @inspects | this
 	 * @basic
+	 * @post | result >= 0
 	 */
 	public int getRowIndex() { return row; }
 	/**
 	 * @inspects | this
 	 * @basic
+	 * @post | result >= 0
 	 */
 	public int getColumnIndex() { return column; }
 	/**
@@ -68,7 +72,7 @@ import java.util.Arrays;
 		if (columnIndex < 0 || columnIndex > (mazeMap.getWidth() - 1)) {throw new IllegalStateException("ColumnIndex out of range."); }
 		if (rowIndex < 0 || rowIndex > (mazeMap.getHeight() - 1)) {throw new IllegalStateException("RowIndex out of range."); }
 		
-		boolean result = new Boolean(mazeMap.isPassable(rowIndex, columnIndex));
+		boolean result = mazeMap.isPassable(rowIndex, columnIndex);
 		return new Square(rowIndex, columnIndex, result, mazemap);
 	}
 	

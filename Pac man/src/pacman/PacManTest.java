@@ -24,7 +24,7 @@ class PacManTest {
 		assert(pacman.getNbLives() == 3);
 		assert(pacman.getSquare().equals(square));
 		
-		Square squareNew = mazeMap.of(mazeMap, 2, 1);
+		Square squareNew = MazeMap.of(mazeMap, 2, 1);
 		pacman.setSquare(squareNew);
 		assert(pacman.getSquare() == squareNew);
 		assert((pacman.getSquare() == square) == false);
@@ -32,6 +32,8 @@ class PacManTest {
 		pacman.die();
 		assert(pacman.getNbLives() == 2);
 		assert((pacman.getNbLives() == 3) == false);
+		//pacman.die();
+		//assertThrows(RuntimeException.class, () -> pacman.die());
 	}
 
 }

@@ -25,6 +25,7 @@ public class MazeMap {
 	 * Returns the width (i.e. the number of columns) of this maze map.
 	 * @basic
 	 * @inspects | this
+	 * @post | result >= 1
 	 */
 	public int getWidth() { return width; }
 	
@@ -32,6 +33,7 @@ public class MazeMap {
 	 * Returns the height (i.e. the number of rows) of this maze map.
 	 * @basic
 	 * @inspects | this
+	 * @post | result >= 1
 	 */
 	public int getHeight() { return height; }
 	
@@ -80,7 +82,7 @@ public class MazeMap {
 		
 		this.width = width;
 		this.height = height;
-		this.passable = passable;
+		this.passable = passable; // TODO Copy toevoegen? Is boolean[] mutable?
 	}
 
 	public boolean equals(MazeMap other) {
@@ -91,7 +93,7 @@ public class MazeMap {
 			}
 		}
 		
-		return true;
+		return true; 
 	}
 	
 	/**

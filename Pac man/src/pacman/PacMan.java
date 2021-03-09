@@ -2,6 +2,8 @@ package pacman;
 
 /**
  * Each instance of this class represents the player-controlled Pac-Man character in a Pac-Man maze.
+ * 
+ * @mutable
  */
 public class PacMan {
 	/**
@@ -14,21 +16,23 @@ public class PacMan {
 	/**
 	 * @basic
 	 * @inspects | this
+	 * @post | result != null
 	 */
 	public Square getSquare() { return square; }
 	/**
 	 * @basic
 	 * @inspects | this
+	 * @post | result >= 0
 	 */
 	public int getNbLives() { return nbLives; }
 
 	/**
-	 * @throws | nbLives < 1
+	 * @throws | nbLives < 1			 // TODO Throws!
 	 * @throws | square == null
 	 * 
 	 * @return | result
-	 * @post | this.getSquare() == square
-	 * @post | this.getNbLives() == nbLives
+	 * @post | getSquare() == square
+	 * @post | getNbLives() == nbLives
 	 */
 	public PacMan(int nbLives, Square square) {
 		this.square = square;
@@ -39,7 +43,7 @@ public class PacMan {
 	 * @throws | square == null
 	 * 
 	 * @mutates | this
-	 * @post | this.getSquare() == square
+	 * @post | getSquare() == square
 	 * @post | getNbLives() == old(getNbLives())
 	 */
 	public void setSquare(Square square) { 
@@ -47,16 +51,16 @@ public class PacMan {
 	
 	/**
 	 * Decreases this Pac-Man character's number of lives by one.
-	 * @throws | this.getNbLives() < 1
+	 * @throws | getNbLives() < 1
 	 * 
 	 * @mutates | this
 	 * @post | getNbLives() == old(getNbLives()) - 1
-	 * @post | this.getSquare().equals(old(getSquare()))
+	 * @post | getSquare() == old(getSquare())
 	 */
 	public void die() { 
 		if (nbLives > 1) {
 			nbLives --;
-		}else{
+		}else {
 			throw new RuntimeException("You died."); 
 			} 
 		}

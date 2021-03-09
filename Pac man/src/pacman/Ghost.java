@@ -9,7 +9,7 @@ public class Ghost {
 	/**
 	 * @invar | square != null
 	 * @invar | direction == Direction.UP || direction == Direction.RIGHT || 
-	 * 		  | direction == Direction.DOWN || direction == Direction.LEFT
+	 * 		  | direction == Direction.DOWN || direction == Direction.LEFT 
 	 */
 	private Square square;
 	private Direction direction;
@@ -17,12 +17,15 @@ public class Ghost {
 	/**
 	 * @basic
 	 * @inspects | this
+	 * @post | result != null
 	 */
 	public Square getSquare() { return square; }
 	
 	/**
 	 * @basic
 	 * @inspects | this
+	 * @post | result == Direction.UP || result == Direction.RIGHT || 
+	 * 		 | result == Direction.DOWN || result == Direction.LEFT 
 	 */
 	public Direction getDirection() { return direction; }
 	
@@ -47,7 +50,8 @@ public class Ghost {
 	 * 
 	 * @mutates | this
 	 * 
-	 * @post | this.getSquare() == square
+	 * @post | getSquare() == square
+	 * @post | getDirection() == old(getDirection())
 	 */
 	public void setSquare(Square square) { 
 		if (square.isPassable() == false) {throw new IllegalStateException("Square must be passable."); }
@@ -58,7 +62,8 @@ public class Ghost {
 	 * @throws | direction == null
 	 * 
 	 * @mutates | this
-	 * @post | this.getDirection() == direction
+	 * @post | getDirection() == direction
+	 * @post | getSquare() == old(getSquare())
 	 */
 	public void setDirection(Direction direction) { 
 		if (direction == null) {throw new IllegalStateException("Direction cannot be null."); }

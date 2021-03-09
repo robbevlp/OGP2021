@@ -13,14 +13,15 @@ public class Dot {
 	/**
 	 * @basic
 	 * @inspects | this
+	 * @post | result != null
 	 */
-	public Square getSquare() { return square; }
+	public Square getSquare() { return square; }  // TODO copy van square, sinds immutable?
 	
 	/**
 	 * @throws | square == null
 	 * 
 	 * @return | this
-	 * @post | this.getSquare() == square
+	 * @post | getSquare() == square
 	 */
 	public Dot(Square square) { 
 		if(square == null) {throw new IllegalStateException("Square cannot be null."); }
