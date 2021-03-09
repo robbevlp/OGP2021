@@ -7,9 +7,11 @@ public class PacMan {
 	/**
 	 * @invar | square != null
 	 * @invar | nbLives >= 0
+	 * @invar | mazemap != null
 	 */
 	private Square square;
 	private int nbLives;
+	private MazeMap mazemap;
 	
 	/**
 	 * @basic
@@ -23,6 +25,13 @@ public class PacMan {
 	public int getNbLives() { return nbLives; }
 
 	/**
+	 * 
+	 * @return | result
+	 * @post | result == this.getSquare().getMazeMap()
+	 */
+	public MazeMap getMazeMap() {return mazemap; }
+	
+	/**
 	 * @throws | nbLives < 1
 	 * @throws | square == null
 	 * 
@@ -31,11 +40,13 @@ public class PacMan {
 	 * @post | this.getNbLives() == nbLives
 	 */
 	public PacMan(int nbLives, Square square) {
+		if (square == null) {throw new IllegalStateException("Square cannot be null."); }
+		if (nbLives < 1) {throw new IllegalStateException("New pacman must have health."); }
 		this.square = square;
 		this.nbLives = nbLives;
 	}
 	
-	/**
+	/** 
 	 * @throws | square == null
 	 * 
 	 * @mutates | this
@@ -43,7 +54,9 @@ public class PacMan {
 	 * @post | getNbLives() == old(getNbLives())
 	 */
 	public void setSquare(Square square) { 
-		this.square = square; }
+		if(square == null) {throw new IllegalStateException("Square cannot be null."); }
+		this.square = square;
+		this.mazemap = square.getMazeMap();}
 	
 	/**
 	 * Decreases this Pac-Man character's number of lives by one.
@@ -54,6 +67,7 @@ public class PacMan {
 	 * @post | this.getSquare().equals(old(getSquare()))
 	 */
 	public void die() { 
+		if (nbLives < 1) {throw new IllegalStateException("Pacman is already dead."); }
 		if (nbLives > 1) {
 			nbLives --;
 		}else{

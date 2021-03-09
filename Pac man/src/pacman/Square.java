@@ -65,10 +65,10 @@ import java.util.Arrays;
 	 * @post | result.isPassable() == mazeMap.isPassable(rowIndex, columnIndex)
 	 */
 	public static Square of(MazeMap mazeMap, int rowIndex, int columnIndex) {
-		if (columnIndex < 0 || columnIndex > (mazeMap.getWidth() - 1)) {throw new IllegalStateException("ColumnIndex out of range."); }
-		if (rowIndex < 0 || rowIndex > (mazeMap.getHeight() - 1)) {throw new IllegalStateException("RowIndex out of range."); }
+		if (columnIndex < 0 || columnIndex >= mazeMap.getWidth()) {throw new IllegalStateException("ColumnIndex out of range."); }
+		if (rowIndex < 0 || rowIndex >= mazeMap.getHeight() - 1) {throw new IllegalStateException("RowIndex out of range."); }
 		
-		boolean result = new Boolean(mazeMap.isPassable(rowIndex, columnIndex));
+		boolean result = mazeMap.isPassable(rowIndex, columnIndex);
 		return new Square(rowIndex, columnIndex, result, mazemap);
 	}
 	
