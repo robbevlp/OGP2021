@@ -29,18 +29,14 @@ public class PacMan {
 	public int getNbLives() { return nbLives; }
 
 	/**
-<<<<<<< HEAD
-	 * @throws | nbLives < 1			 // TODO Throws!
-=======
-	 * 
 	 * @return | result
 	 * @post | result == this.getSquare().getMazeMap()
+	 * @post | result != null
 	 */
 	public MazeMap getMazeMap() {return mazemap; }
 	
 	/**
 	 * @throws | nbLives < 1
->>>>>>> branch 'master' of https://github.com/robbevlp/OGP2021
 	 * @throws | square == null
 	 * 
 	 * @return | result

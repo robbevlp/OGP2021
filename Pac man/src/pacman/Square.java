@@ -53,6 +53,7 @@ import java.util.stream.IntStream;
 	/**
 	 * @inspects | this
 	 * @basic
+	 * @post | result == true || result == false
 	 */
 	public boolean isPassable() { return passable; }
 	
