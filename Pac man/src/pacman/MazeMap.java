@@ -97,8 +97,8 @@ public class MazeMap {
 	}
 	
 	/**
-	 * @throws | rowIndex < 0 || rowIndex > (mazeMap.getHeight() - 1)
-	 * @throws | columnIndex < 0 || columnIndex > (mazeMap.getWidth() - 1)
+	 * @throws | rowIndex < 0 || rowIndex >= mazeMap.getHeight()
+	 * @throws | columnIndex < 0 || columnIndex >= mazeMap.getWidth()
 	 * 
 	 * @inspects | mazeMap
 	 * 
@@ -109,8 +109,8 @@ public class MazeMap {
 	 * @post | result.isPassable() == mazeMap.isPassable(rowIndex, columnIndex)
 	 */
 	public static Square of(MazeMap mazeMap, int rowIndex, int columnIndex) {
-		if(rowIndex < 0 || rowIndex > (mazeMap.getHeight() - 1)) {throw new IllegalStateException("row is out of range."); }
-		if(columnIndex < 0 || columnIndex > (mazeMap.getWidth() - 1)) {throw new IllegalStateException("column is out of range"); }
+		if(rowIndex < 0 || rowIndex >= mazeMap.getHeight()) {throw new IllegalStateException("row is out of range."); }
+		if(columnIndex < 0 || columnIndex >= mazeMap.getWidth()) {throw new IllegalStateException("column is out of range"); }
 		boolean passable = mazeMap.isPassable(rowIndex, columnIndex);
 		return new Square(rowIndex, columnIndex, passable, mazeMap);
 	}	
