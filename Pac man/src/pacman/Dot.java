@@ -20,7 +20,7 @@ public class Dot {
 	/**
 	 * @throws | square == null
 	 * 
-	 * @return | this
+	 * @creates | this
 	 * @post | getSquare() == square
 	 */
 	public Dot(Square square) { 

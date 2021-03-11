@@ -18,7 +18,7 @@ class PacManTest {
 				false, true, false, true, true, false,
 				false, false, false, false, false, false};
 		MazeMap mazeMap = new MazeMap(6, 10, passable);
-		Square square = mazeMap.of(mazeMap, 1, 1);
+		Square square = MazeMap.of(mazeMap, 1, 1);
 		
 		PacMan pacman = new PacMan(3, square);
 		assert(pacman.getNbLives() == 3);

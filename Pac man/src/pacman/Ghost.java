@@ -33,7 +33,7 @@ public class Ghost {
 	 * @throws | square.isPassable() == false
 	 * @throws | direction == null
 	 * 
-	 * @return | this
+	 * @creates | this
 	 * @post | this.getSquare() == square
 	 * @post | this.getDirection() == direction
 	 */

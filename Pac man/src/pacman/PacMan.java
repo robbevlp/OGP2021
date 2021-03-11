@@ -29,6 +29,7 @@ public class PacMan {
 	public int getNbLives() { return nbLives; }
 
 	/**
+	 * @inspects | this
 	 * @return | result
 	 * @post | result == this.getSquare().getMazeMap()
 	 * @post | result != null
@@ -38,8 +39,9 @@ public class PacMan {
 	/**
 	 * @throws | nbLives < 1
 	 * @throws | square == null
+	 * @inspects | square
 	 * 
-	 * @return | result
+	 * @creates | this
 	 * @post | getSquare() == square
 	 * @post | getNbLives() == nbLives
 	 */
@@ -48,11 +50,12 @@ public class PacMan {
 		if (nbLives < 1) {throw new IllegalStateException("New pacman must have health."); }
 		this.square = square;
 		this.nbLives = nbLives;
+		this.mazemap = square.getMazeMap();
 	}
 	
 	/** 
 	 * @throws | square == null
-	 * 
+	 * @inspects | this
 	 * @mutates | this
 	 * @post | getSquare() == square
 	 * @post | getNbLives() == old(getNbLives())
@@ -65,7 +68,7 @@ public class PacMan {
 	/**
 	 * Decreases this Pac-Man character's number of lives by one.
 	 * @throws | getNbLives() < 1
-	 * 
+	 * @inspects | this
 	 * @mutates | this
 	 * @post | getNbLives() == old(getNbLives()) - 1
 	 * @post | getSquare() == old(getSquare())

@@ -21,7 +21,11 @@ import java.util.ArrayList;
 	
 	
 	/**
-	 * Already covered with method: Square of()
+	 * @creates | this
+	 * @post | this.getRowIndex() == row
+	 * @post | this.getColumnIndex() == column
+	 * @post | this.isPassable() == passable
+	 * @post | this.getMazeMap() == mazeMap
 	 */
 	public Square(int row, int column, boolean passable, MazeMap mazeMap) {
 		this.row = row;
@@ -61,7 +65,7 @@ import java.util.ArrayList;
 	 * 
 	 * @inspects | mazeMap
 	 * 	
-	 * @return | result
+	 * @returns | result
 	 * @post | result.getRowIndex() == rowIndex
 	 * @post | result.getColumnIndex() == columnIndex
 	 * @post | result.getMazeMap() == mazeMap

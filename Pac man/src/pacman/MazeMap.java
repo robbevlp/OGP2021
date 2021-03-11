@@ -17,6 +17,8 @@ public class MazeMap {
 	 * @invar | passable != null
 	 * @invar | passable.length == width * height
 	 * @invar | IntStream.range(0, passable.length).allMatch(i -> passable[i] == false || passable[i] == true)
+	 * 
+	 * @representationObject | passable
 	 */
 	private int width;
 	private int height;
@@ -43,7 +45,7 @@ public class MazeMap {
 	 * 
 	 * @throws | rowIndex < 0 || rowIndex > (this.getHeight() - 1)
 	 * @throws | columnIndex < 0 || columnIndex > (this.getWidth() - 1)
-	 * 
+	 * @inspects | this
 	 * @returns | result
 	 * @post | result == false || result == true
 	 */
@@ -67,7 +69,7 @@ public class MazeMap {
 	 * @throws | passable.length != height * width
 	 * @throws | IntStream.range(0, passable.length).allMatch(i -> passable[i] == false || passable[i] == true)
 	 * 
-	 * @return | result
+	 * @creates | this
 	 * @post | this.getWidth() == width
 	 * @post | this.getHeight() == height
 	 * @post | IntStream.range(0, this.getHeight()).allMatch(rowIndex ->
@@ -82,10 +84,19 @@ public class MazeMap {
 		
 		this.width = width;
 		this.height = height;
-		this.passable = passable; // TODO Copy toevoegen? Is boolean[] mutable?
+		this.passable = passable; 
 	}
-
+	
+	/**
+	 * @throws | other == null
+	 * @inspects | this
+	 * @inspects | other
+	 * 
+	 * @returns | result
+	 * @post | result == false || result == true
+	 */
 	public boolean equals(MazeMap other) {
+		if(other == null) {throw new IllegalStateException("Other MazeMap cannot be null."); }
 		if (other.getWidth() != width || other.getHeight() != height) {return false;}
 		for (int row = 0; row < height; row ++) {
 			for (int column = 0; column < width; column++) {
