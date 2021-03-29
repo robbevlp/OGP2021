@@ -5,7 +5,6 @@ package pacman;
  * @immutable
  */
 public class Dot extends FoodItem{
-	
 	/**
 	 * @throws | newSquare == null
 	 * 
@@ -14,7 +13,8 @@ public class Dot extends FoodItem{
 	 */
 	public Dot(Square newSquare) { 
 		if(newSquare == null) {throw new IllegalStateException("Dot square cannot be null."); }
-		square = newSquare; 
+		this.square = newSquare; 
+		this.size = 1;
 	}
 	
 	

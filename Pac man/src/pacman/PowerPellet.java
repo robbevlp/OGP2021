@@ -1,8 +1,6 @@
 package pacman;
 
 public class PowerPellet extends FoodItem{
-
-	
 	/**
 	 * @throws | newSquare == null
 	 * 
@@ -12,14 +10,7 @@ public class PowerPellet extends FoodItem{
 	public PowerPellet(Square newSquare) {
 		if(newSquare == null) {throw new IllegalStateException("PowerPellet square cannot be null."); }
 		this.square = newSquare;
+		this.size = 2;
 	}
 	
-	/**
-	 * @basic
-	 * @inspects | this
-	 * @post | result != null
-	 */
-	public Square getSquare() {
-		return square;
-	}
 }

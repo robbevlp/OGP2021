@@ -5,6 +5,7 @@ public class FoodItem {
 	 * @invar | square != null
 	 */
 	protected Square square;
+	protected int size;
 	
 	/**
 	 * @basic
@@ -18,8 +19,7 @@ public class FoodItem {
 	 * @post | result == 1 || result == 2
 	 */
 	public int getSize() {
-		if (this instanceof PowerPellet) {return 2;}
-		else { return 1;}
+		return this.size;
 	}
 	
 }

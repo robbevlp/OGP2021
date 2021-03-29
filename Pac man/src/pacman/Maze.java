@@ -21,6 +21,7 @@ public class Maze {
 	public Maze(Random random, MazeMap map, PacMan pacMan, Ghost[] ghosts, FoodItem[] newFoodItems) {
 		this.random = random;
 		this.map = map;
+		map.setMaze(this);
 		this.pacMan = pacMan;
 		this.ghosts = ghosts.clone();
 		this.foodItems = newFoodItems.clone();
