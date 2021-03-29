@@ -4,27 +4,19 @@ package pacman;
  * Each instance of this class represents a dot (a piece of food for Pac-Man) in a Pac-Man maze.
  * @immutable
  */
-public class Dot {
-	/**
-	 * @invar | square != null
-	 */
-	private Square square;
+public class Dot extends FoodItem{
 	
 	/**
-	 * @basic
-	 * @inspects | this
-	 * @post | result != null
-	 */
-	public Square getSquare() { return square; }  // TODO copy van square, sinds immutable?
-	
-	/**
-	 * @throws | square == null
+	 * @throws | newSquare == null
 	 * 
 	 * @creates | this
-	 * @post | getSquare() == square
+	 * @post | getSquare() == newSquare
 	 */
-	public Dot(Square square) { 
-		if(square == null) {throw new IllegalStateException("Square cannot be null."); }
-		this.square = square; }
+	public Dot(Square newSquare) { 
+		if(newSquare == null) {throw new IllegalStateException("Dot square cannot be null."); }
+		square = newSquare; 
+	}
+	
+	
 	
 }

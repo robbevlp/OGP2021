@@ -1,6 +1,5 @@
 package pacman;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Maze {
@@ -9,7 +8,7 @@ public class Maze {
 	private MazeMap map;
 	private PacMan pacMan;
 	private Ghost[] ghosts;
-	private Dot[] dots;
+	private FoodItem[] foodItems;
 	
 	public MazeMap getMap() { return map; }
 	
@@ -17,24 +16,29 @@ public class Maze {
 	
 	public Ghost[] getGhosts() { return ghosts.clone(); }
 	
-	public Dot[] getDots() { return dots.clone(); }
+	public FoodItem[] getFoodItems() { return foodItems.clone(); }
 	
-	public Maze(Random random, MazeMap map, PacMan pacMan, Ghost[] ghosts, Dot[] dots) {
+	public Maze(Random random, MazeMap map, PacMan pacMan, Ghost[] ghosts, FoodItem[] newFoodItems) {
 		this.random = random;
 		this.map = map;
 		this.pacMan = pacMan;
 		this.ghosts = ghosts.clone();
-		this.dots = dots.clone();
+		this.foodItems = newFoodItems.clone();
 	}
 	
 	public boolean isCompleted() {
-		return dots.length == 0;
+		boolean completed = true;
+		for(FoodItem item : foodItems) {
+			if(item instanceof Dot) {completed = false;}
+		}
+		return completed;
 	}
 	
 	private void checkPacManDamage() {
 		for (Ghost ghost : ghosts)
 			if (ghost.getSquare().equals(pacMan.getSquare()))
-				pacMan.die();
+				ghost.hitBy(pacMan);
+			
 	}
 	
 	public void moveGhosts() {
@@ -43,17 +47,18 @@ public class Maze {
 		checkPacManDamage();
 	}
 	
-	private void removeDotAtIndex(int index) {
-		Dot[] newDots = new Dot[dots.length - 1];
-		System.arraycopy(dots, 0, newDots, 0, index);
-		System.arraycopy(dots, index + 1, newDots, index, newDots.length - index);
-		dots = newDots;
+	private void removeFoodItemAtIndex(int index) {
+		if (foodItems[index] instanceof PowerPellet) {for (Ghost ghost : ghosts) {ghost.pacManAtePowerPellet(); }}
+		FoodItem[] newFoodItems = new FoodItem[foodItems.length - 1];
+		System.arraycopy(foodItems, 0, newFoodItems, 0, index);
+		System.arraycopy(foodItems, index + 1, newFoodItems, index, newFoodItems.length - index);
+		foodItems = newFoodItems;
 	}
 	
 	private void removeDotAtSquare(Square square) {
-		for (int i = 0; i < dots.length; i++) {
-			if (dots[i].getSquare().equals(square)) {
-				removeDotAtIndex(i);
+		for (int i = 0; i < foodItems.length; i++) {
+			if (foodItems[i].getSquare().equals(square)) {
+				removeFoodItemAtIndex(i);
 				return;
 			}
 		}

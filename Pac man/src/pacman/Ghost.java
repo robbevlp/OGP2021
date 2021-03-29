@@ -10,9 +10,14 @@ public class Ghost {
 	 * @invar | square != null
 	 * @invar | direction == Direction.UP || direction == Direction.RIGHT || 
 	 * 		  | direction == Direction.DOWN || direction == Direction.LEFT 
+	 * @invar | state != null
+	 * @invar | originalSquare != null
 	 */
 	private Square square;
 	private Direction direction;
+	private GhostState state = new RegularGhostState();
+	final Square originalSquare;
+	
 	
 	/**
 	 * @basic
@@ -30,6 +35,15 @@ public class Ghost {
 	public Direction getDirection() { return direction; }
 	
 	/**
+	 * @basic
+	 * @inspects | this
+	 * @post | result == true || result == false
+	 */
+	public boolean isVulnerable() {
+		return state instanceof VulnerableGhostState;
+	}
+	
+	/**
 	 * @throws | square.isPassable() == false
 	 * @throws | direction == null
 	 * 
@@ -42,6 +56,7 @@ public class Ghost {
 		if (direction == null) {throw new IllegalStateException("Direction cannot be null."); }
 		this.square = square;
 		this.direction = direction;
+		this.originalSquare = square;
 	}
 	
 	/**
@@ -85,8 +100,25 @@ public class Ghost {
 	}
 	
 	// No formal document required
-	public void move(Random random) {
+	public void reallyMove(Random random) {
 		setDirection(chooseNextMoveDirection(random));
 		setSquare(getSquare().getNeighbor(getDirection()));
+	}
+	
+	public void move(Random random) {
+		state = state.move(this, random);
+	}
+	
+	public void setState(GhostState newState) {
+		this.state = newState;
+	}
+	
+	public void pacManAtePowerPellet() {
+		this.state = new VulnerableGhostState(1);
+		this.direction = direction.getOpposite();
+	}
+	
+	public void hitBy(PacMan pacMan) {
+		this.state = this.state.hitBy(this, pacMan);
 	}
 }

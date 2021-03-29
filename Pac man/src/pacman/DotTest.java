@@ -22,7 +22,7 @@ class DotTest {
 		Square square = mazeMap.of(mazeMap, 1, 1);
 		
 		Dot dot = new Dot(square);
-		assert(dot.getSquare() == square);
+		assert(dot.getSize() == 1);
 		
 	}
 
