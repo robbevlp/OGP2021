@@ -2,6 +2,15 @@ package pacman;
 
 public class PowerPellet extends FoodItem{
 
+	/**
+	 * @basic
+	 * @inspects | this
+	 * @post | result != null
+	 */
+	@Override
+	public Square getSquare() {	// TODO:  Nodig? -- Reeds in FoodItem.java
+		return square;
+	}
 	
 	/**
 	 * @throws | newSquare == null
@@ -13,13 +22,14 @@ public class PowerPellet extends FoodItem{
 		if(newSquare == null) {throw new IllegalStateException("PowerPellet square cannot be null."); }
 		this.square = newSquare;
 	}
-	
+
 	/**
-	 * @basic
-	 * @inspects | this
-	 * @post | result != null
+	 * @post | result == 2
 	 */
-	public Square getSquare() {
-		return square;
+	@Override
+	public int getSize() {
+		return 2;
 	}
+	
+	
 }

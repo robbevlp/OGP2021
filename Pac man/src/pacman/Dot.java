@@ -7,6 +7,16 @@ package pacman;
 public class Dot extends FoodItem{
 	
 	/**
+	 * @basic
+	 * @inspects | this
+	 * @post | result != null
+	 */
+	@Override
+	public Square getSquare() {	// TODO Nodig? -- Reeds in FoodItem.java
+		return square;
+	}
+	
+	/**
 	 * @throws | newSquare == null
 	 * 
 	 * @creates | this
@@ -17,6 +27,13 @@ public class Dot extends FoodItem{
 		square = newSquare; 
 	}
 	
+	/**
+	 * @post | result == 1
+	 */
+	@Override
+	public int getSize() {
+		return 1;
+	}
 	
 	
 }
