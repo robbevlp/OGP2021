@@ -3,16 +3,6 @@ package pacman;
 public class PowerPellet extends FoodItem{
 
 	/**
-	 * @basic
-	 * @inspects | this
-	 * @post | result != null
-	 */
-	@Override
-	public Square getSquare() {	// TODO:  Nodig? -- Reeds in FoodItem.java
-		return square;
-	}
-	
-	/**
 	 * @throws | newSquare == null
 	 * 
 	 * @creates | this
