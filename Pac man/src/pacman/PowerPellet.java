@@ -11,6 +11,7 @@ public class PowerPellet extends FoodItem{
 	public PowerPellet(Square newSquare) {
 		if(newSquare == null) {throw new IllegalStateException("PowerPellet square cannot be null."); }
 		this.square = newSquare;
+		this.size = 2;
 	}
 
 	/**
@@ -20,6 +21,5 @@ public class PowerPellet extends FoodItem{
 	public int getSize() {
 		return 2;
 	}
-	
-	
+
 }

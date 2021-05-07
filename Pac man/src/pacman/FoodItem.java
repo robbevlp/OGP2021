@@ -5,6 +5,7 @@ public abstract class FoodItem {
 	 * @invar | square != null
 	 */
 	protected Square square;
+	protected int size;
 	
 	/**
 	 * @basic
@@ -20,6 +21,5 @@ public abstract class FoodItem {
 	 */
 	public abstract int getSize();
 	
-	
-	
+
 }

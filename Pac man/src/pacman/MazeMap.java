@@ -23,6 +23,7 @@ public class MazeMap {
 	private int width;
 	private int height;
 	private boolean[] passable;
+	private Maze maze;
 	/**
 	 * Returns the width (i.e. the number of columns) of this maze map.
 	 * @basic
@@ -125,4 +126,9 @@ public class MazeMap {
 		boolean passable = mazeMap.isPassable(rowIndex, columnIndex);
 		return new Square(rowIndex, columnIndex, passable, mazeMap);
 	}	
+
+	void setMaze(Maze maze) {this.maze = maze; }
+	
+	Maze getMaze() {return maze; }
+	
 }
