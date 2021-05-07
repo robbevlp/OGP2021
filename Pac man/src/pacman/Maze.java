@@ -1,6 +1,13 @@
 package pacman;
 
+
+import java.util.Arrays;
 import java.util.Random;
+
+
+import pacman.wormholes.ArrivalPortal;
+import pacman.wormholes.DeparturePortal;
+import pacman.wormholes.Wormhole;
 
 public class Maze {
 	
@@ -9,8 +16,42 @@ public class Maze {
 	private PacMan pacMan;
 	private Ghost[] ghosts;
 	private FoodItem[] foodItems;
+	private ArrivalPortal[] arrivalPortals;
+	private DeparturePortal[] departurePortals;
+	private Wormhole[] wormholes;
+	
 	
 	public MazeMap getMap() { return map; }
+	
+	public ArrivalPortal[] getArrivalPortals() {
+		return arrivalPortals.clone();
+	}
+	
+	public DeparturePortal[] getDeparturePortals() {
+		return departurePortals.clone();
+	}
+	
+	public void addWormhole(Wormhole wormhole) {
+		boolean Arrival = false;
+		for (int i = 0; i < arrivalPortals.length; i++) {
+			if (wormhole.getArrivalPortal().equals(arrivalPortals[i])){Arrival = true;}
+		}
+		
+		boolean Departure = false;
+		for (int j = 0; j < departurePortals.length; j++) {
+			if(wormhole.getDeparturePortal().equals(departurePortals[j])) {Departure = true;}
+		}
+		
+		if (Departure == true && Arrival == true) {
+			Wormhole[] Holes = Arrays.copyOf(wormholes, wormholes.length + 1);
+			Holes[wormholes.length] = wormhole;
+			this.wormholes = Holes;
+		}
+	}
+	
+	public Wormhole[]	getWormholes() {
+		return wormholes.clone();
+	}
 	
 	public PacMan getPacMan() { return pacMan; }
 	
@@ -18,13 +59,25 @@ public class Maze {
 	
 	public FoodItem[] getFoodItems() { return foodItems.clone(); }
 	
-	public Maze(Random random, MazeMap map, PacMan pacMan, Ghost[] ghosts, FoodItem[] newFoodItems) {
+	public Maze(Random random, MazeMap map, PacMan pacMan, Ghost[] ghosts, FoodItem[] newFoodItems, ArrivalPortal[] newArrivalPortals, DeparturePortal[] newDeparturePortals) {
+		for(int i = 0 ; i < newArrivalPortals.length ; i++) {
+			if (newArrivalPortals[i].checkOrder(newArrivalPortals[i + 1]))
+			{} else {throw new IllegalArgumentException("newArrivalPortals[] must be sorted from from left to right and top to bottom.");}
+		}
+		
+		for(int i = 0 ; i < newDeparturePortals.length ; i++) {
+			if (newDeparturePortals[i].checkOrder(newDeparturePortals[i + 1]))
+			{} else {throw new IllegalArgumentException("newDeparturePortals[] must be sorted from from left to right and top to bottom.");}
+		}
+		
 		this.random = random;
 		this.map = map;
 		map.setMaze(this);
 		this.pacMan = pacMan;
 		this.ghosts = ghosts.clone();
 		this.foodItems = newFoodItems.clone();
+		this.departurePortals = newDeparturePortals.clone();
+		this.arrivalPortals = newArrivalPortals.clone();
 	}
 	
 	public boolean isCompleted() {
@@ -68,6 +121,20 @@ public class Maze {
 	public void movePacMan(Direction direction) {
 		Square newSquare = pacMan.getSquare().getNeighbor(direction);
 		if (newSquare.isPassable()) {
+			checkPacManDamage();
+			
+			for (DeparturePortal portal : departurePortals) {
+				if (portal.getSquare().equals(newSquare)) {
+					checkPacManDamage();
+					int N = random.nextInt(portal.getWormholes().size());
+					int i = 0;
+					for (Wormhole wormhole: wormholes) {
+						if (i == N) {newSquare = wormhole.getArrivalPortal().getSquare();}
+						i++;
+					}	
+				}
+			}
+			
 			pacMan.setSquare(newSquare);
 			removeDotAtSquare(newSquare);
 			checkPacManDamage();

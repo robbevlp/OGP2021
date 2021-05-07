@@ -1,7 +1,6 @@
 package pacman.gui;
 
 import java.awt.EventQueue;
-import java.util.Random;
 
 import javax.swing.JFrame;
 

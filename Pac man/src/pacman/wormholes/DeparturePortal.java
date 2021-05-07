@@ -24,7 +24,7 @@ public class DeparturePortal {
 	 *@representationObject
 	 *@peerObjects
 	 */
-	HashSet<Wormhole> wormholes = new HashSet<>();	
+	private HashSet<Wormhole> wormholes = new HashSet<>();	
 	
 	
 	/**
@@ -58,35 +58,30 @@ public class DeparturePortal {
 	}
 	
 	
-//	/**
-//	 * @throws IllegalArgumentException | wormhole == null
-//	 * @mutates_porperties | getWormholes()
-//	 * @post | getWormholes().stream().allMatch(w -> w != null)
-//	 * 
-//	 */
-//	void addWormhole(Wormhole wormhole) {
-//		if (wormhole == null) {
-//			throw new IllegalArgumentException("wormhole is null");
-//		}
-//		wormholes.add(wormhole);
-//		//TODO: bidirectionele associatie checken!
-//	}
-//	
+	/**
+	 * @throws IllegalArgumentException | wormhole == null
+	 * @mutates_porperties | getWormholes()
+	 * @post | getWormholes().stream().allMatch(w -> w != null)
+	 * 
+	 */
+	void addWormhole(Wormhole wormhole) {
+		if (wormhole == null) {
+			throw new IllegalArgumentException("wormhole is null");}
+		// check of portals in de lijst van portals zit in maze
+		this.wormholes.add(wormhole); 
+	}
 	
-//	/**
-//	 * @throws IllegalArgumentException | square == null
-//	 * @mutates_properties | getSquare()
-//	 * @post | getSquare() == square
-//	 */
-//	public void setSquare(Square square) {
-//		if (square == null) {
-//			throw new IllegalArgumentException("square is null");
-//		}
-//		wormholes.remove(this);
-//		this.square = square;
-//				// TODO: bidirectionele associatie checken!
-//	}
-//	
-	
+	public boolean checkOrder(DeparturePortal portal) {
+		Square square1 = portal.getSquare();
+		Square square0 = this.getSquare();
+		
+		if (square1.equals(square0)) {throw new IllegalArgumentException("Use two differant portals.");}
+		
+		if (square1.getRowIndex() < square0.getRowIndex()) {return false;}
+		if (square1.getRowIndex() == square0.getRowIndex()) {
+			if (square1.getColumnIndex() < square0.getColumnIndex()) { return false;}
+		}
+		return true;
+	}
 	
 }

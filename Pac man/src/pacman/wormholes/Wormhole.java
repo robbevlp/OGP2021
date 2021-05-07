@@ -2,8 +2,8 @@ package pacman.wormholes;
 
 public class Wormhole {
 	
-	DeparturePortal departureportal;
-	ArrivalPortal arrivalportal;
+	private DeparturePortal departureportal;
+	private ArrivalPortal arrivalportal;
 	
 	
 	public DeparturePortal getDeparturePortal() {
@@ -21,12 +21,14 @@ public class Wormhole {
 	}
 	
 	public void setDeparturePortal(DeparturePortal other) {
+		// vorige portal moet deze wormhole uit zijn lijst verwijderen
 		departureportal = other;
-		departureportal.wormholes.add(this);	//TODO: bidirectionele associatie correct?
+		departureportal.addWormhole(this);
 	}
 	
 	public void setArrivalPortal(ArrivalPortal other) {
+		// vorige portal moet deze wormhole uit zijn lijst verwijderen
 		arrivalportal = other;
-		arrivalportal.wormholes.add(this);		//TODO: idem
+		arrivalportal.addWormhole(this);		
 	}
 }
