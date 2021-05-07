@@ -17,7 +17,7 @@ public class ArrivalPortal {
 		throw new RuntimeException("Not yet implemented");
 	}
 	
-	public ArrivalPortal(Square square) {}		//TODO: Square hier al instellen?
+	public ArrivalPortal(Square square) {}
 	
 	void addWormhole(Wormhole wormhole) {
 		throw new RuntimeException("Not yet implemented");
