@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import pacman.MazeMap;
 import pacman.Square;
 
-class WomrholesTest {
+class WormholesTest {
 
 	@Test
 	void test() {
