@@ -121,7 +121,7 @@ public class Maze {
 			removeDotAtSquare(newSquare);
 			
 			for (DeparturePortal portal : departurePortals) {
-				if (portal.getSquare().equals(newSquare)) {
+				if (portal.getSquare().equals(newSquare) && !(portal.getWormholes().isEmpty())) {
 					int N = random.nextInt(portal.getWormholes().size());
 					int i = 0;
 					for (Wormhole wormhole: portal.getWormholes()) {
