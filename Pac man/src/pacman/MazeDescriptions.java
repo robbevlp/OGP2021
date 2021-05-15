@@ -50,8 +50,8 @@ public class MazeDescriptions {
 				switch (c) {
 				case ' ' -> {}
 				case '#' -> {}
-				case 'D' -> departurePortals[nbDeparturePortals++] = new DeparturePortal(Square.of(map, row, column));
-				case 'A' -> arrivalPortals[nbArrivalPortals++] = new ArrivalPortal(Square.of(map, row, column));
+				case 'D' -> departurePortals[nbDeparturePortals++] = new DeparturePortal(new Square(row, column, true, map));
+				case 'A' -> arrivalPortals[nbArrivalPortals++] = new ArrivalPortal(new Square(row, column, true, map));
 				case '.' -> foodItems[nbFoodItems++] = new Dot(Square.of(map, row, column));
 				case 'p' -> foodItems[nbFoodItems++] = new PowerPellet(Square.of(map,  row, column));
 				case 'G' -> ghosts[nbGhosts++] = new Ghost(Square.of(map, row, column), Direction.values()[random.nextInt(Direction.values().length)]);
@@ -65,10 +65,20 @@ public class MazeDescriptions {
 			}
 		}
 		
+		ArrivalPortal[] aPortals = new ArrivalPortal[nbArrivalPortals];
+		for (int i = 0; i < nbArrivalPortals; i++) 
+			aPortals[i] = arrivalPortals[i];
+		
+		
+		DeparturePortal[] dPortals = new DeparturePortal[nbDeparturePortals];
+		for (int i = 0; i < nbDeparturePortals; i++) 
+			dPortals[i] = departurePortals[i];
+		
+		
 		if (pacMan == null)
 			throw new IllegalArgumentException("Maze description does not contain a P character");
 		
-		return new Maze(random, map, pacMan, Arrays.copyOf(ghosts, nbGhosts), Arrays.copyOf(foodItems, nbFoodItems), arrivalPortals, departurePortals);
+		return new Maze(random, map, pacMan, Arrays.copyOf(ghosts, nbGhosts), Arrays.copyOf(foodItems, nbFoodItems), aPortals, dPortals);
 	}
 
 }

@@ -18,7 +18,7 @@ public class Maze {
 	private FoodItem[] foodItems;
 	private ArrivalPortal[] arrivalPortals;
 	private DeparturePortal[] departurePortals;
-	private Wormhole[] wormholes;
+	private Wormhole[] wormholes = {};
 	
 	
 	public MazeMap getMap() { return map; }
@@ -60,16 +60,10 @@ public class Maze {
 	public FoodItem[] getFoodItems() { return foodItems.clone(); }
 	
 	public Maze(Random random, MazeMap map, PacMan pacMan, Ghost[] ghosts, FoodItem[] newFoodItems, ArrivalPortal[] newArrivalPortals, DeparturePortal[] newDeparturePortals) {
-		
-		for(int j = 0 ; j <= newArrivalPortals.length - 2; j++) {
-			if (newArrivalPortals[j].checkOrder(newArrivalPortals[j + 1]) == false)
-				throw new IllegalArgumentException("newArrivalPortals[] must be sorted from from left to right and top to bottom.");
-		}
-		
-		for(int i = 0 ; i <= newDeparturePortals.length - 2; i++) {
-			if (newDeparturePortals[i].checkOrder(newDeparturePortals[i + 1]) == false)
-				throw new IllegalArgumentException("newDeparturePortals[] must be sorted from from left to right and top to bottom.");
-		}
+		if (arrivalSort(newArrivalPortals) == false)
+			throw new IllegalArgumentException("The list of Arrival Portals must be sorted.");
+		if (departureSort(newDeparturePortals) == false)
+			throw new IllegalArgumentException("The list of Departure Portals must be sorted.");
 		
 		this.random = random;
 		this.map = map;
@@ -122,24 +116,42 @@ public class Maze {
 	public void movePacMan(Direction direction) {
 		Square newSquare = pacMan.getSquare().getNeighbor(direction);
 		if (newSquare.isPassable()) {
+			pacMan.setSquare(newSquare);
 			checkPacManDamage();
+			removeDotAtSquare(newSquare);
 			
 			for (DeparturePortal portal : departurePortals) {
 				if (portal.getSquare().equals(newSquare)) {
-					checkPacManDamage();
 					int N = random.nextInt(portal.getWormholes().size());
 					int i = 0;
-					for (Wormhole wormhole: wormholes) {
+					for (Wormhole wormhole: portal.getWormholes()) {
 						if (i == N) {newSquare = wormhole.getArrivalPortal().getSquare();}
 						i++;
 					}	
+					pacMan.setSquare(newSquare);
+					checkPacManDamage();
 				}
 			}
-			
-			pacMan.setSquare(newSquare);
-			removeDotAtSquare(newSquare);
-			checkPacManDamage();
 		}
 	}
 	
+	public boolean arrivalSort(ArrivalPortal[] portals) {
+		boolean result = true;
+		
+		for (int i = 0; i < portals.length - 1; i++)
+			if (portals[i].checkOrder(portals[i + 1]) == false)
+				result = false;
+		
+		return result;
+	}
+	
+	public boolean departureSort(DeparturePortal[] portals) {
+		boolean result = true;
+		
+		for (int i = 0; i < portals.length - 1; i++)
+			if (portals[i].checkOrder(portals[i + 1]) == false)
+				result = false;
+		
+		return result;
+	}
 }
