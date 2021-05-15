@@ -3,7 +3,7 @@ package pacman;
 
 import java.util.Arrays;
 import java.util.Random;
-
+import java.util.stream.Stream;
 
 import pacman.wormholes.ArrivalPortal;
 import pacman.wormholes.DeparturePortal;
@@ -60,14 +60,15 @@ public class Maze {
 	public FoodItem[] getFoodItems() { return foodItems.clone(); }
 	
 	public Maze(Random random, MazeMap map, PacMan pacMan, Ghost[] ghosts, FoodItem[] newFoodItems, ArrivalPortal[] newArrivalPortals, DeparturePortal[] newDeparturePortals) {
-		for(int i = 0 ; i < newArrivalPortals.length ; i++) {
-			if (newArrivalPortals[i].checkOrder(newArrivalPortals[i + 1]))
-			{} else {throw new IllegalArgumentException("newArrivalPortals[] must be sorted from from left to right and top to bottom.");}
+		
+		for(int j = 0 ; j <= newArrivalPortals.length - 2; j++) {
+			if (newArrivalPortals[j].checkOrder(newArrivalPortals[j + 1]) == false)
+				throw new IllegalArgumentException("newArrivalPortals[] must be sorted from from left to right and top to bottom.");
 		}
 		
-		for(int i = 0 ; i < newDeparturePortals.length ; i++) {
-			if (newDeparturePortals[i].checkOrder(newDeparturePortals[i + 1]))
-			{} else {throw new IllegalArgumentException("newDeparturePortals[] must be sorted from from left to right and top to bottom.");}
+		for(int i = 0 ; i <= newDeparturePortals.length - 2; i++) {
+			if (newDeparturePortals[i].checkOrder(newDeparturePortals[i + 1]) == false)
+				throw new IllegalArgumentException("newDeparturePortals[] must be sorted from from left to right and top to bottom.");
 		}
 		
 		this.random = random;
