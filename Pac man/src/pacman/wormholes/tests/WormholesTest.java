@@ -1,4 +1,4 @@
-package wormholes.tests;
+package pacman.wormholes.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,32 +38,35 @@ class WormholesTest {
 		
 		Wormhole hole = new Wormhole(portalD, portalA);
 		
-		assert(portalA.getWormholes().contains(hole) == true);
-		assert(portalD.getWormholes().contains(hole) == true);
+		assertTrue(portalA.getWormholes().contains(hole));
+		assertTrue(portalD.getWormholes().contains(hole));
 		
-		assert(hole.getArrivalPortal() == portalA);
-		assert(hole.getDeparturePortal() == portalD);
+		assertEquals(hole.getArrivalPortal(), portalA);
+		assertEquals(hole.getDeparturePortal(), portalD);
 		
 		hole.setDeparturePortal(newPortalD);
 		
-		assert(portalD.getWormholes().isEmpty() == true);
-		assert(newPortalD.getWormholes().contains(hole) == true);
-		assert(hole.getDeparturePortal() == newPortalD);
+		assertTrue(portalD.getWormholes().isEmpty());
+		assertTrue(newPortalD.getWormholes().contains(hole));
+		assertEquals(hole.getDeparturePortal(), newPortalD);
 		
 		hole.setArrivalPortal(newPortalA);
 		
-		assert(portalA.getWormholes().isEmpty() == true);
-		assert(newPortalA.getWormholes().contains(hole));
-		assert(hole.getArrivalPortal() == newPortalA);
+		assertTrue(portalA.getWormholes().isEmpty()); 
+		assertTrue(newPortalA.getWormholes().contains(hole));
+		assertEquals(hole.getArrivalPortal(), newPortalA);
 		
 		hole.setArrivalPortal(newPortalA);
 		
-		assert(newPortalA.getWormholes().contains(hole));
-		assert(hole.getArrivalPortal() == newPortalA);
+		assertTrue(newPortalA.getWormholes().contains(hole));
+		assertEquals(hole.getArrivalPortal(), newPortalA);
 		
 		hole.setDeparturePortal(newPortalD);
-		assert(newPortalD.getWormholes().contains(hole) == true);
-		assert(hole.getDeparturePortal() == newPortalD);
+		assertTrue(newPortalD.getWormholes().contains(hole));
+		assertEquals(hole.getDeparturePortal(), newPortalD);
+		
+		assertTrue(newPortalA.checkOrder(portalA));
+		assertTrue(newPortalD.checkOrder(portalD));
 		
 		
 	}
