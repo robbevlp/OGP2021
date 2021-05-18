@@ -26,31 +26,43 @@ class WomrholesTest {
 		Square square0 = new Square(3, 3, true, mazeMap);
 		Square square1 = new Square(2, 3, true, mazeMap);
 		Square square2 = new Square(1, 1, true, mazeMap);
+		Square square3 = new Square(1, 3, true, mazeMap);
 		
-//		ArrivalPortal portalA = new ArrivalPortal(square0);
-//		DeparturePortal portalD = new DeparturePortal(square1);
-//		DeparturePortal newPortalD = new DeparturePortal(square2);
-//		
-//		Wormhole hole = new Wormhole(portalD, portalA);
-//		
-//		assert(portalA.getWormholes().contains(hole) == true);
-//		assert(portalD.getWormholes().contains(hole) == true);
-//		
-//		assert(hole.getArrivalPortal() == portalA);
-//		assert(hole.getDeparturePortal() == portalD);
-//		
-//		hole.setDeparturePortal(newPortalD);
-//		
-//		assert(portalD.getWormholes().isEmpty() == true);
-//		assert(newPortalD.getWormholes().contains(hole) == true);
-//		assert(hole.getDeparturePortal() == newPortalD);
-//		
-		ArrivalPortal[] newArrivalPortals = {new ArrivalPortal(square2), new ArrivalPortal(square1), new ArrivalPortal(square0)};
+		ArrivalPortal portalA = new ArrivalPortal(square0);
+		ArrivalPortal newPortalA = new ArrivalPortal(square3);
+		DeparturePortal portalD = new DeparturePortal(square1);
+		DeparturePortal newPortalD = new DeparturePortal(square2);
 		
-		for(int j = 0 ; j <= newArrivalPortals.length - 2; j++) {
-			assert(newArrivalPortals[j].checkOrder(newArrivalPortals[j+1]));
-			System.out.print("1");
-		}
+		Wormhole hole = new Wormhole(portalD, portalA);
+		
+		assert(portalA.getWormholes().contains(hole) == true);
+		assert(portalD.getWormholes().contains(hole) == true);
+		
+		assert(hole.getArrivalPortal() == portalA);
+		assert(hole.getDeparturePortal() == portalD);
+		
+		hole.setDeparturePortal(newPortalD);
+		
+		assert(portalD.getWormholes().isEmpty() == true);
+		assert(newPortalD.getWormholes().contains(hole) == true);
+		assert(hole.getDeparturePortal() == newPortalD);
+		
+		hole.setArrivalPortal(newPortalA);
+		
+		assert(portalA.getWormholes().isEmpty() == true);
+		assert(newPortalA.getWormholes().contains(hole));
+		assert(hole.getArrivalPortal() == newPortalA);
+		
+		hole.setArrivalPortal(newPortalA);
+		
+		assert(newPortalA.getWormholes().contains(hole));
+		assert(hole.getArrivalPortal() == newPortalA);
+		
+		hole.setDeparturePortal(newPortalD);
+		assert(newPortalD.getWormholes().contains(hole) == true);
+		assert(hole.getDeparturePortal() == newPortalD);
+		
+		
 	}
 
 } 
