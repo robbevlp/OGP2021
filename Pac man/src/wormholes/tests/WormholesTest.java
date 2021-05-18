@@ -1,4 +1,4 @@
-package pacman.wormholes;
+package wormholes.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,8 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import pacman.MazeMap;
 import pacman.Square;
+import pacman.wormholes.ArrivalPortal;
+import pacman.wormholes.DeparturePortal;
+import pacman.wormholes.Wormhole;
 
-class WomrholesTest {
+class WormholesTest {
 
 	@Test
 	void test() {
